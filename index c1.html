@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exploring HTML Forms</title>
+  <style>
+    /* Global styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 20px;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    fieldset {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+
+    legend {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #555;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #4285f4;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #357ae8;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+  </style>
+  <script>
+    function validateForm(event) {
+      event.preventDefault(); // Prevent form submission
+
+      const errorDiv = document.getElementById('error');
+      errorDiv.innerHTML = ""; // Clear previous errors
+
+      const email = document.getElementById('email').value.trim();
+      let errorMessage = "";
+
+      if (email === "") {
+        errorMessage += "Email is required.<br>";
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorMessage += "Please enter a valid email address.<br>";
+      }
+
+      if (errorMessage) {
+        errorDiv.innerHTML = errorMessage;
+      } else {
+        alert("Form submitted successfully!");
+        document.getElementById('form').submit();
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="form-container">
+    <h1>HTML Form Assignment</h1>
+    <form id="form" action="/submit" method="post" onsubmit="validateForm(event)">
+      <div id="error" class="error"></div>
+
+      <!-- Fieldset for Basic Information -->
+      <fieldset>
+        <legend>Basic Information</legend>
+        <label for="textInput">Name:</label>
+        <input type="text" id="textInput" name="name" placeholder="Enter your name" required maxlength="100">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required maxlength="254">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Create a password" required minlength="8">
+      </fieldset>
+
+      <!-- Fieldset for Message -->
+      <fieldset>
+        <legend>Message</legend>
+        <label for="message">Your Message:</label>
+        <textarea id="message" name="message" rows="4" placeholder="Write your message here..." maxlength="500"></textarea>
+      </fieldset>
+
+      <!-- Fieldset for Preferences -->
+      <fieldset>
+        <legend>Preferences</legend>
+        <label>
+          <input type="checkbox" name="subscribe" required> Subscribe to our newsletter
+        </label>
+
+        <label>Preferred Contact Method:</label>
+        <input type="radio" id="contactEmail" name="contactMethod" value="Email" required>
+        <label for="contactEmail">Email</label><br>
+        <input type="radio" id="contactPhone" name="contactMethod" value="Phone">
+        <label for="contactPhone">Phone</label>
+      </fieldset>
+
+      <!-- Fieldset for Other Options -->
+      <fieldset>
+        <legend>Other Options</legend>
+        <label for="dropdown">Select an Option:</label>
+        <select id="dropdown" name="options" required>
+          <option value="" disabled selected>Choose...</option>
+          <option value="Option1">Option 1</option>
+          <option value="Option2">Option 2</option>
+          <option value="Option3">Option 3</option>
+        </select>
+      </fieldset>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
